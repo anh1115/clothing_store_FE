@@ -1,0 +1,117 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
+.inventory_quantity {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  div {
+    flex: 0 0 50%;
+    .vendor {
+      color: $primary-color;
+    }
+  }
+}
+.product_name {
+  margin-bottom: 15px;
+  text-align: left;
+  font-weight: 700;
+}
+.price_box {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  .title_price {
+    font-weight: 600;
+  }
+  .special_price {
+    font-size: 30px;
+    color: $primary-color;
+    font-weight: 600;
+  }
+}
+.optionSelect {
+  margin: 2rem 0;
+}
+.colorOption,
+.sizeOption {
+  margin: 0 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: 1px solid gray;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.selected {
+  border: 2px solid red;
+  position: relative;
+  &::after {
+    background-color: #af1713;
+    border-radius: 0 0 10px 0;
+    color: #fff;
+    content: "✓";
+    font-size: 7px;
+    height: 10px;
+    left: 0;
+    padding-bottom: 11px;
+    padding-left: 4px;
+    position: absolute;
+    top: 0;
+    width: 14px;
+  }
+}
+
+.quantity {
+  margin: 1rem 0;
+}
+.group_button {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 20px;
+  justify-content: space-evenly;
+  button {
+    background-color: $primary-color;
+    flex: 0 0 40%;
+  }
+  a {
+    flex: 0 0 40%;
+    background-color: $primary-color;
+    color: $text-white;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+}
+.box_camket {
+  margin-top: 20px;
+  .title {
+    font-weight: 700;
+  }
+  .camket {
+    margin-top: 10px;
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      margin-right: -5px;
+      margin-left: -5px;
+      padding-left: unset;
+      li {
+        flex: 0 0 50%;
+        max-width: 50%;
+        position: relative;
+        width: 100%;
+        padding-right: 5px;
+        padding-left: 5px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+        img {
+          max-width: 26px;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}

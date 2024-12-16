@@ -1,0 +1,38 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
+.register {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .gender {
+    display: flex;
+    flex-direction: column;
+    label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-right: 2rem;
+    }
+    .optionGender {
+      text-align: center;
+      display: flex;
+    }
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+  .error {
+    color: red;
+    font-size: 14px;
+    margin: 5px 0;
+  }
+}

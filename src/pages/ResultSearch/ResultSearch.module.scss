@@ -1,0 +1,22 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
+.card {
+    .cardBody {
+        .cardText {
+            font-weight: bold;
+            font-size: 1.2rem;
+            &:hover {
+                color: $primary-color;
+            }
+        }
+        .cardTitle {
+            color: $primary-color;
+            font-weight: bold;
+        }
+    }
+    .cardFooter {
+        background-color: unset;
+        border-top: unset;
+    }
+}

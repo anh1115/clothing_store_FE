@@ -1,0 +1,22 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
+.loginForm {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  .link {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+}
