@@ -41,3 +41,13 @@
     }
   }
 }
+
+.title_ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Hiển thị tối đa 2 dòng */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal; /* Cho phép ngắt dòng */
+  height: 56px;
+}

@@ -6,11 +6,19 @@ import CategoryApi from '../../api/categories';
 import { useCart } from '../../components/Contexts/CartContext';
 import PriceFilter from './PriceFilter';
 import productApi from '../../api/productApi';
+import { Pagination } from 'react-bootstrap';
 
 export default function ListProduct() {
     const appName = import.meta.env.VITE_REACT_APP_NAME;
     const { id } = useParams();
     const [products, setProducts] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
+    const [totalPages, setTotalPages] = useState(1); // Tổng số trang
+
+    // Hàm thay đổi trang
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
 
     const listPrice = [
         {
@@ -46,28 +54,32 @@ export default function ListProduct() {
     ]
 
     useEffect(() => {
-        fetchProductsByCategory(id);
-    }, [id]);
+        fetchProductsByCategory(id, currentPage);
+    }, [id, currentPage]);
 
     // Hàm xử lý dữ liệu nhận từ PriceFilter
-    const handlePriceChange = async (min, max, id) => {
-        
+    const handlePriceChange = async (min, max, id, currentPage) => {
+
         if (min !== null && max !== null) {
             try {
-                const response = await productApi.getProductByPrice(min, max, id);
-                setProducts(response.data); // Cập nhật danh sách sản phẩm theo giá
+                const response = await productApi.getProductByPrice(min, max, id, currentPage);
+                setTotalPages(response.data.total_pages);
+                setProducts(response.data.results); // Cập nhật danh sách sản phẩm theo giá
             } catch (error) {
                 console.error('Error fetching products:', error);
             }
         } else {
-            fetchProductsByCategory(id);
+            fetchProductsByCategory(id, currentPage);
         }
     };
 
-    const fetchProductsByCategory = async (categoryId) => {
+
+    const fetchProductsByCategory = async (categoryId, currentPage) => {
         try {
-            const response = await CategoryApi.getById(categoryId); // API lấy danh sách sản phẩm
-            setProducts(response.data); // Cập nhật state sản phẩm
+            const response = await CategoryApi.getById(categoryId, currentPage); // API lấy danh sách sản phẩm
+            setTotalPages(response.data.total_pages);
+            setProducts(response.data.results); // Cập nhật state sản phẩm
+
         } catch (error) {
             console.error("Error fetching related products:", error);
         }
@@ -80,7 +92,7 @@ export default function ListProduct() {
             </Helmet>
 
             <div>
-                <PriceFilter listPrice={listPrice} onPriceChange={handlePriceChange} category_id={id} />
+                <PriceFilter listPrice={listPrice} onPriceChange={handlePriceChange} category_id={id} currentPage={currentPage} />
                 {/* Kiểm tra nếu không có sản phẩm */}
                 {products.length === 0 ? (
                     <div className="text-center">
@@ -100,12 +112,12 @@ export default function ListProduct() {
                                             loading='lazy'
                                         />
                                         <div className={`card-body ${styles.cardBody}`}>
+                                            <Link to={`/product/${product.product_id}`} className={`card-text ${styles.cardText} ${styles.title_ellipsis}`}>
+                                                {product.name}
+                                            </Link>
                                             <p className={`card-title ${styles.cardTitle}`}>
                                                 {parseFloat(product.sell_price).toLocaleString()}đ
                                             </p>
-                                            <Link to={`/product/${product.product_id}`} className={`card-text ${styles.cardText}`}>
-                                                {product.name}
-                                            </Link>
                                         </div>
                                         <div className={`card-footer ${styles.cardFooter}`}>
                                             <Link to={`/product/${product.product_id}`}>
@@ -119,6 +131,26 @@ export default function ListProduct() {
                     </>
                 )}
             </div>
+            {/* Phân trang */}
+            <Pagination className='mt-5'>
+                <Pagination.Prev
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                />
+                {[...Array(totalPages)].map((_, index) => (
+                    <Pagination.Item
+                        key={index}
+                        active={index + 1 === currentPage}
+                        onClick={() => handlePageChange(index + 1)}
+                    >
+                        {index + 1}
+                    </Pagination.Item>
+                ))}
+                <Pagination.Next
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                />
+            </Pagination>
         </div>
     );
 }

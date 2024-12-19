@@ -23,6 +23,7 @@ export default function ProductDetail() {
     const [quantity, setQuantity] = useState(1);
     const [selectedColor, setSelectedColor] = useState(null);
     const [selectedSize, setSelectedSize] = useState(null);
+    const [quantityStock, setQuantityStock] = useState(0);
     const { addToCart } = useCart();
     const navigate = useNavigate();
 
@@ -34,11 +35,8 @@ export default function ProductDetail() {
                 setSelectedColor(response.data.colors[0]);
                 setSelectedSize(response.data.sizes[0]);
 
-                // Nếu sản phẩm có category_id, gọi API lấy sản phẩm liên quan
-                if (response.data.categories[0].category_id) {
-                    fetchRelatedProducts(response.data.categories[0].category_id);
-
-                }
+                // Gọi API sản phẩm liên quan với product_id
+                await fetchRelatedProducts(response.data.product_id);
             } catch (error) {
                 console.error('Error fetching Product:', error);
             } finally {
@@ -46,9 +44,9 @@ export default function ProductDetail() {
             }
         };
 
-        const fetchRelatedProducts = async (categoryId) => {
+        const fetchRelatedProducts = async (productId) => {
             try {
-                const response = await CategoryApi.getById(categoryId); // API lấy danh sách sản phẩm liên quan
+                const response = await productApi.getRelatedProducts(productId); // API lấy danh sách sản phẩm liên quan
                 setProductRelate(response.data); // Cập nhật state sản phẩm liên quan
             } catch (error) {
                 console.error("Error fetching related products:", error);
@@ -72,6 +70,7 @@ export default function ProductDetail() {
         const colorStock = product.stock_quantities.find(
             stock => stock.color.color_id === color.color_id && stock.size.size_id === size.size_id
           );
+          setQuantityStock(colorStock.quantity);
         return !colorStock || colorStock.quantity <= 0; // Kiểm tra nếu không tìm thấy hoặc số lượng bằng 0
     };
 
@@ -81,6 +80,9 @@ export default function ProductDetail() {
         // Kiểm tra nếu sản phẩm với màu sắc và kích thước đã chọn còn hàng
         if (isOutOfStocks(selectedColor, selectedSize)) {
             alert("Sản phẩm với màu sắc và kích thước đã chọn hiện không còn hàng.");
+            return;
+        }else if(quantityStock < quantity) {
+            alert("Số lượng sản phẩm còn lại không đủ.");
             return;
         }
         // Lấy các thông tin cần thiết để thêm sản phẩm vào giỏ
@@ -211,7 +213,7 @@ export default function ProductDetail() {
                 </Col>
             </Row>
             <div className='mt-3'>
-                <ProductDetailTabs description={product.description} />
+                <ProductDetailTabs description={product.description} product_id={product.product_id} />
             </div>
             <div className='mt-3'>
                 <h2>Sản phẩm liên quan</h2>

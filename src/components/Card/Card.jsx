@@ -1,39 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import styles from './Card.module.scss';
 
 export default function CardProduct() {
-  const products = [
-    {
-      id: 1,
-      title: 'Quần dài ống suông',
-      price: 299000,
-      oldPrice: 399000,
-      imgSrc: '/den-hnqda025-5-20221226110916-0a.webp',
-    },
-    {
-      id: 2,
-      title: 'Quần tây ống suông',
-      price: 259000,
-      oldPrice: 359000,
-      imgSrc: '/den-hnqda025-5-20221226110916-0a.webp',
-    },
-    {
-      id: 3,
-      title: 'Chân váy lửng form A phối vải voan',
-      price: 199000,
-      oldPrice: 299000,
-      imgSrc: '/den-hnqda025-5-20221226110916-0a.webp',
-    },
-    {
-      id: 4,
-      title: 'Đầm ôm nini cổ vuông tay xòe',
-      price: 149000,
-      oldPrice: 249000,
-      imgSrc: '/den-hnqda025-5-20221226110916-0a.webp',
-    },
-  ];
+  const [products, setData] = useState({ top_sales: [] }); // Khởi tạo mảng rỗng an toàn
+  const [loading, setLoading] = useState(true); // Trạng thái loading
+
+  // Hàm lấy token từ localStorage
+  const getToken = () => {
+    const userInfo = localStorage.getItem('userInfo');
+    return userInfo ? JSON.parse(userInfo)?.token : null;
+  };
+
+  useEffect(() => {
+    const fetchTopSales = async () => {
+      try {
+        const token = getToken();
+        const response = await fetch('http://127.0.0.1:8000/api/top-sales-realtime', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${token}`, // Thêm token vào header
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        console.error('Failed to fetch top sales data:', error);
+      } finally {
+        setLoading(false); // Kết thúc trạng thái loading dù có lỗi hay không
+      }
+    };
+
+    fetchTopSales();
+  }, []);
 
   const handleAddToCart = (productId) => {
     alert(`Thêm sản phẩm ID: ${productId} vào giỏ hàng!`);
@@ -41,30 +47,41 @@ export default function CardProduct() {
 
   return (
     <Row xs={2} md={4} className="g-4 my-3">
-      {products.map((product) => (
-        <Col key={product.id}>
-          <Card className="h-100">
-            <Card.Img variant="top" src={product.imgSrc} alt={product.title} loading='lazy' />
-            <Card.Body>
-              <Card.Title>
-                <Link to={'/'}>{product.title}</Link>
-              </Card.Title>
-              <Card.Text>
-                <span className="text-danger fw-bold">{product.price.toLocaleString()}đ</span>
-                <span className="text-muted text-decoration-line-through ms-2">
-                  {product.oldPrice.toLocaleString()}đ
-                </span>
-              </Card.Text>
-              <Button
-                className={styles.addCard}
-                onClick={() => handleAddToCart(product.id)}
-              >
-                Thêm vào giỏ
-              </Button>
-            </Card.Body>
-          </Card>
-        </Col>
-      ))}
+      {loading ? (
+        <div>Loading...</div> // Hiển thị trạng thái loading
+      ) : products.top_sales.length > 0 ? (
+        products.top_sales.map((product) => (
+          <Col key={product.product_id}>
+            <Card className="h-100">
+              <Card.Img
+                variant="top"
+                src={product.image_url && product.image_url.length > 0 ? 'http://127.0.0.1:8000/media/' + product.image_url : ''} // Xử lý hình ảnh nếu bị thiếu
+                alt={product.name}
+                loading="lazy"
+              />
+              <Card.Body>
+                <Card.Title>
+                  <Link to={`/product/${product.product_id}`} className={styles.title_ellipsis}>{product.name || 'Tên sản phẩm'}</Link>
+                </Card.Title>
+                <Card.Text>
+                  <span className="text-danger fw-bold">
+                    {product.sell_price ? product.sell_price.toLocaleString() : '0'}đ
+                  </span>
+                </Card.Text>
+                <Link to={`/product/${product.product_id}`}>
+                  <Button
+                    className={styles.addCard}
+                  >
+                    Xem chi tiết
+                  </Button>
+                </Link>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))
+      ) : (
+        <div>Không có sản phẩm nào.</div> // Xử lý khi không có dữ liệu
+      )}
     </Row>
   );
 }

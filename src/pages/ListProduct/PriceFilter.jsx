@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './ListProduct.module.scss'; // Import module SCSS
 
-function PriceFilter({ listPrice, onPriceChange, category_id }) {
+function PriceFilter({ listPrice, onPriceChange, category_id, currentPage }) {
     const [selectedPrices, setSelectedPrices] = useState([]); // State lưu khoảng giá đã chọn
 
     // Xử lý sự kiện khi checkbox thay đổi
@@ -34,9 +34,9 @@ function PriceFilter({ listPrice, onPriceChange, category_id }) {
     // Gọi callback để truyền dữ liệu lên cha
     useEffect(() => {
         if (onPriceChange) {
-            onPriceChange(min, max, category_id);
+            onPriceChange(min, max, category_id, currentPage);
         }
-    }, [min, max]);
+    }, [min, max, currentPage]);
 
     return (
         <div className={`mb-5 ${styles.fillter}`}>

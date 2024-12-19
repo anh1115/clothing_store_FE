@@ -22,7 +22,6 @@ const Home = () => {
             </section>
             <section className='my-5'>
                 <TopSale/>
-                <div className={`text-center ${styles['read-more']}`}><Link to={'/'}>Xem thêm</Link></div>
             </section>
             <section><Policy/></section>
         </div>
