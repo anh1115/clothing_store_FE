@@ -1,0 +1,24 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
+.listCategory {
+  display: flex;
+  justify-content: center;
+  gap: 6rem;
+  margin-top: 2rem;
+  font-size: larger;
+  font-weight: bold;
+  a {
+    border: 1px dashed #333;
+    padding: 0.3rem 1rem;
+    border-radius: 1rem;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    &:hover {
+      border-color: $primary-color;
+      box-shadow: 6px 6px 40px -10px rgba(175,23,19,1);
+      span {
+        color: $primary-color;
+      }
+    }
+  }
+}

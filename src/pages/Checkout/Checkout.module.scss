@@ -1,0 +1,27 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
+.sumPrice {
+    padding-block: 1rem;
+    border-bottom: 1px solid gray;
+}
+
+b {
+    color: $primary-color;
+}
+
+.paymentMethod {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    label {
+        input {
+            margin-right: 10px;
+        }
+    }
+}
+
+.modal_60w {
+    max-width: none !important;
+    width: 60%;
+}

@@ -1,0 +1,53 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
+.container {
+  .card {
+    .cardBody {
+      .cardText {
+        font-weight: bold;
+        font-size: 1.2rem;
+        &:hover {
+          color: $primary-color;
+        }
+      }
+      .cardTitle {
+        color: $primary-color;
+        font-weight: bold;
+      }
+    }
+    .cardFooter {
+      background-color: unset;
+      border-top: unset;
+    }
+  }
+  .fillter {
+    background-color: #ededed;
+    padding: 1rem;
+    border: 1px solid $primary-color;
+    border-radius: 0.3rem;
+    .listPrice {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2rem;
+      margin-top: 1.5rem;
+      .priceFillter {
+        padding: 0.2rem;
+        border: 1px solid gray;
+        text-align: center;
+        border-radius: 0.3rem;
+        background-color: $text-white;
+      }
+    }
+  }
+}
+
+.title_ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Hiển thị tối đa 2 dòng */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal; /* Cho phép ngắt dòng */
+  height: 56px;
+}

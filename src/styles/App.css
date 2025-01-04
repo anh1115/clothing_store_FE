@@ -1,0 +1,112 @@
+/* Reset cơ bản */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%; /* Đảm bảo font-size mặc định là 16px */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  background-color: #fff;
+  color: #333;
+}
+
+/* Loại bỏ các style mặc định của các thẻ HTML */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol, p {
+  list-style: none;
+  margin-bottom: 0;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.nav-item .active {
+  background-color: #af1713 !important;
+  color: white !important;
+}
+
+button:hover {
+  color: white !important;
+}
+
+button:disabled {
+  background-color: gray !important;
+  cursor: unset;
+}
+
+img {
+  max-width: 100%;
+  display: block; /* Ngăn chặn các khoảng trắng dưới ảnh */
+  height: auto;
+}
+
+/* Đảm bảo các thẻ nhập liệu không có style mặc định */
+input, textarea, select {
+  border: 1px solid #ccc;
+  font: inherit;
+}
+
+/* Chỉnh sửa thẻ form */
+form {
+  display: block;
+}
+
+/* Xóa padding và margin mặc định của table */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+caption {
+  font-weight: bold;
+  text-align: center;
+}
+
+.swiper-button-prev, .swiper-button-next {
+  color: red;
+}
+
+.swiper-button-prev:hover, .swiper-button-next:hover {
+  color: white;
+  background-color: red;
+  padding: 0 1.4rem;
+  border-radius: 100%;
+}
+
+.swiper-button-prev::after, .swiper-button-next::after {
+  font-size: 1rem;
+}
+
+.fixed-image {
+  height: 363px; /* Chiều cao cố định */
+  object-fit: cover; /* Giữ tỉ lệ và cắt hình cho vừa khung */
+  width: 100%; /* Đảm bảo hình đầy đủ chiều ngang */
+}
+
+.active> .page-link {
+  background-color: #af1713;
+  border-color: #af1713;
+  color: #fff !important;
+}
+
+.pagination .page-item .page-link {
+  color: #333;
+}
+
+#uncontrolled-tab-example-tab-home {
+  color: #333;
+}

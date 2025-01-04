@@ -1,0 +1,75 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
+.noResults {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchForm {
+    border-bottom: 1px solid #333;
+    input {
+        border: unset;
+        outline: unset;
+        max-width: 26rem;
+    }
+}
+.searchSuggest {
+    position: absolute;
+    top: 6rem;
+    width: 100%;
+    display: block;
+    z-index: 9999999;
+    padding: 10px 0;
+    background: #fff;
+    border: solid 1px #dfe3e8;
+    box-shadow: 0 0px 2px 0 rgba(60, 64, 67, 0.1), 0 0px 6px 0px rgba(60, 64, 67, 0.25);
+    max-height: 46rem;
+}
+
+.listResult {
+    .cardProduct {
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid $secondary-color;
+        img {
+            width: 26%;
+        }
+        .product_info {
+            display: flex;
+            flex-direction: column;
+            padding-left: 10px;
+            margin: 5px 0;
+            .productName {
+                font-weight: bold;
+                &:hover {
+                    color: $primary-color;
+                }
+            }
+            .price {
+                color: $primary-color;
+                font-weight: 700;
+            }
+        }
+    }
+    .see_more {
+        text-align: center;
+        margin-top: 10px;
+        a {
+            &:hover {
+                color: $primary-color;
+            }
+        }
+    }
+}
+.title_ellipsis {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Hiển thị tối đa 2 dòng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal; /* Cho phép ngắt dòng */
+    height: 46px;
+}

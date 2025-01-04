@@ -1,0 +1,115 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
+.topbar {
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid $primary-color;
+  .info {
+    display: flex;
+    align-items: center ;
+    a {
+      white-space: nowrap;
+    }
+    button {
+      margin-left: 1rem;
+    }
+  }
+  .link {
+    display: flex;
+    gap: 1rem;
+    a {
+      list-style: none;
+      background-color: $primary-color;
+      padding: 2px 6px;
+      border-radius: $border-radius-1;
+      color: $text-white;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+}
+.centerbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
+  position: relative;
+  .rightContent {
+    display: flex;
+    gap: 1rem;
+    a {
+        color: inherit;
+    }
+    .cart,
+    .check {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      svg {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}
+nav {
+  background: $primary-color;
+  padding: 1rem 0;
+  ul {
+    display: flex;
+    justify-content: space-evenly;
+    li,
+    a {
+      color: $text-white;
+    }
+    .dropdownProducts {
+      display: flex;
+      align-items: center;
+      :hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.totalProductInCard {
+  background-color: $primary-color;
+  color: $text-white;
+  padding: 0 0.5rem;
+  border-radius: 50%;
+  position: absolute;
+  top: -1rem;
+  right: 0;
+}
+
+.menu_category {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 2.5rem;
+  width: 100%;
+  border-radius: 1%;
+  background-color: $bg-color;
+  z-index: 999;
+  padding: 1rem;
+  box-shadow: 0px 2px 6px 0px rgba(50,50,50,0.33);
+}
+
+/* Đặt menu_category ẩn mặc định */
+.menu_category {
+  display: none;
+}
+
+/* Khi hover vào .dropdownProducts, hiển thị .menu_category */
+.dropdownProducts:hover .menu_category,
+.menu_category:hover .menuCategory:hover {
+  display: block;
+}
+
+.active {
+  border-bottom: 1px solid yellow;
+}

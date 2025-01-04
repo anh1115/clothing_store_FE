@@ -1,0 +1,16 @@
+/* Style cho nút */
+button {
+    width: 100%;
+    background-color: $primary-color;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+
+    &:hover {
+        background-color: darken($primary-color, 10%);
+        color: $text-white;
+    }
+}

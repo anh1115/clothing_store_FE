@@ -1,0 +1,4 @@
+/* Mixin cho shadow */
+@mixin box-shadow($color, $blur) {
+    box-shadow: 0 2px $blur $color;
+}

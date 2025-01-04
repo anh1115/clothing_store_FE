@@ -1,0 +1,29 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
+.footer {
+    padding-top: 4rem;
+    margin-top: 3rem;
+    background-color: #f1f1f1;
+    p {
+        text-align: center;
+    }
+    .ft_bottom {
+        border-top: 1px solid $primary-color;
+        margin-bottom: 2rem;
+        span {
+            display: flex;
+        }
+    }
+    .logo {
+        padding-top: 30px;
+        padding-inline: 10px;
+        margin-bottom: 20px;
+    }
+    .copyright {
+        background-color: $primary-color;
+        p {
+            color: $text-white;
+        }
+    }
+}

@@ -1,0 +1,35 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
+.card {
+    .cardBody {
+        .cardText {
+            font-weight: bold;
+            font-size: 1.2rem;
+            &:hover {
+                color: $primary-color;
+            }
+        }
+        .cardTitle {
+            color: $primary-color;
+            font-weight: bold;
+        }
+    }
+    .cardFooter {
+        background-color: unset;
+        border-top: unset;
+    }
+}
+
+.title_ellipsis {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Hiển thị tối đa 2 dòng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal; /* Cho phép ngắt dòng */
+    height: 56px;
+  }
+  .cardImgTop {
+    height: 200px;
+  }

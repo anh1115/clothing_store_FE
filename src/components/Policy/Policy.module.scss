@@ -1,0 +1,9 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
+.subtxt {
+    display: block;
+    max-width: 50%;
+    text-align: center;
+    margin: 0 auto;
+}

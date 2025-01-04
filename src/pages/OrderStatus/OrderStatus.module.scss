@@ -1,0 +1,11 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
+.order {
+    border-bottom: 2px dashed $primary-color;
+    padding-bottom: 1rem;
+}
+
+.producName {
+    width: 50rem;
+}

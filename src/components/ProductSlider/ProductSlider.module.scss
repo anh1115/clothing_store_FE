@@ -1,0 +1,24 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
+.product-card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+  
+  .product-card-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Giới hạn 2 dòng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal; /* Cho phép xuống dòng */
+    height: 48px;
+  }
+
+  .addCard {
+    background-color: $primary-color !important;
+    border: unset !important;
+  }

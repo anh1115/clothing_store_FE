@@ -1,0 +1,20 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
+.content_payment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+        width: 6rem;
+    }
+    .button_link {
+        background-color: $primary-color;
+        color: $text-white;
+        padding: 0.3rem 1rem;
+        transition: scale 0.3s ease;
+        &:hover {
+            scale: 1.1;
+        }
+    }
+}
