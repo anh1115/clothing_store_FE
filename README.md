@@ -34,8 +34,8 @@
 ## Cài đặt
 1. Clone dự án:
    ```bash
-   git clone https://github.com/TranDuc41/clothing-store-fe.git
-   cd clothing-store-fe
+   git clone https://github.com/anh1115/clothing_store_FE
+   cd clothing-store-FE
    ```
 
 2. Cài đặt các gói phụ thuộc:
