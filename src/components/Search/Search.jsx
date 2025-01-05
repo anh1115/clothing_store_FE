@@ -58,8 +58,8 @@ export default function Search() {
       // Call API ở đây
       const fetchProducts = async (debouncedKeyword) => {
         try {
-          const response = await productApi.getProductByName(debouncedKeyword); // API lấy danh sách sản phẩm
-          setResult(response.data); // Cập nhật state sản phẩm
+          const response = await productApi.getProductByName(debouncedKeyword, 1); // API lấy danh sách sản phẩm
+          setResult(response.data.results); // Cập nhật state sản phẩm
         } catch (error) {
           console.error("Error fetching related products:", error);
         }
@@ -90,7 +90,7 @@ export default function Search() {
                 <div className={`${styles.result} col-lg-4 col-fix`}>
                   <span>Có <b>{result.length}</b> sản phẩm</span>
                   <div className={styles.listResult}>
-                    {result.slice(0, 4).map((product, index) => (
+                    {result.slice(0, 3).map((product, index) => (
                       <div className={styles.cardProduct} key={index}>
                         <img src={product.images && product.images.length > 0 ? 'http://127.0.0.1:8000' + product.images[0].url : ''} alt={product.name} loading='lazy' />
                         <div className={styles.product_info}>
